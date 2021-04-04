@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="exDBF.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="pathDBF" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="findString" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="wWin" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">600</Value>
+    </Setting>
+    <Setting Name="hWin" Type="System.String" Scope="User">
+      <Value Profile="(Default)">480</Value>
+    </Setting>
+    <Setting Name="fileDBF" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="pathCSV" Type="System.String" Scope="User">
+      <Value Profile="(Default)">csv</Value>
+    </Setting>
+    <Setting Name="pathPIC" Type="System.String" Scope="User">
+      <Value Profile="(Default)">pic</Value>
+    </Setting>
+    <Setting Name="maxRecords" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="titleButton" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Выгрузить в файл</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

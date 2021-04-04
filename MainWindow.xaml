@@ -1,0 +1,181 @@
+﻿<Window x:Class="exDBF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:p="clr-namespace:exDBF.Properties"
+        mc:Ignorable="d"
+        Icon="exDBF.ico"
+        Title="Выгрузка данных из DBF" 
+        Closed="Window_Closed" 
+        Height="{Binding Source={x:Static p:Settings.Default}, Path=hWin, Mode=TwoWay}"
+        Width="{Binding Source={x:Static p:Settings.Default}, Path=wWin, Mode=TwoWay}"
+    >
+
+    <Window.Resources>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="60"/>
+        </Style>
+
+        <Style x:Key="IsFindTopRowDefinition" >
+            <Setter Property="RowDefinition.Height" Value="1*"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsClickEnabled}" Value="True">
+                    <Setter Property="RowDefinition.Height" Value="1*"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=IsClickEnabled}" Value="False">
+                    <Setter Property="RowDefinition.Height" Value="0"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="IsFindBottomRowDefinition" >
+            <Setter Property="RowDefinition.Height" Value="0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsClickEnabled}" Value="False">
+                    <Setter Property="RowDefinition.Height" Value="1*"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=IsClickEnabled}" Value="True">
+                    <Setter Property="RowDefinition.Height" Value="0"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style x:Key="SpliteRowDefinition" >
+            <Setter Property="RowDefinition.Height" Value="1*"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsVisibleList}" Value="True">
+                    <Setter Property="RowDefinition.Height" Value="1*"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=IsVisibleList}" Value="False">
+                    <Setter Property="RowDefinition.Height" Value="0"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="Wait">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsClickEnabled}" Value="False" >
+                    <Setter Property="Foreground" Value="Red"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsClickEnabled}" Value="True" >
+                    <Setter Property="Foreground" Value="Black"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+
+    </Window.Resources>
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel  Grid.Row="0" Grid.Column="0" LastChildFill="True"  VerticalAlignment="Center">
+            <Button DockPanel.Dock="Left" Content="Выбрать" Command="{Binding Path=SelectionDBFFileCommand}" CommandParameter="{Binding  ElementName=txtPath, Path=Text}"
+                Focusable="False" ToolTip="Выбрать файл DBF"/>
+
+            <TextBox DockPanel.Dock="Left" x:Name="txtPath" HorizontalAlignment="Stretch" ToolTip="Файл DBF"                  
+                  DataContext="{Binding Source={x:Static p:Settings.Default}}" Text="{Binding Path=fileDBF}"   MinWidth="220" 
+                     TextAlignment="Left" VerticalAlignment="Center" Margin="5,0,5,0">
+
+            </TextBox>
+        </DockPanel>
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Command="{Binding Path=ExtractDBFCommand}" Width="150" Focusable="False" HorizontalAlignment="Left"
+                        Content="{Binding Path=ButtonExtractTitle}"  ToolTip="Выгрузить записи DBF-файла в формате .csv">
+                </Button>
+
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <DockPanel Grid.Column="0" LastChildFill="True" Margin="5,0,5,0" VerticalAlignment="Center">
+                        <TextBlock DockPanel.Dock="Left" Text="Папка CSV:" />
+                        <TextBox DockPanel.Dock="Right" DataContext="{Binding Source={x:Static p:Settings.Default}}" Text="{Binding Path=pathCSV}" 
+                                 Margin="5,0,5,0" ToolTip="Имя папки для выгрузки CSV-файла. Создается в директории файла "/>
+                    </DockPanel>
+
+                    <DockPanel Grid.Column="1" LastChildFill="True" VerticalAlignment="Center">
+                        <TextBlock DockPanel.Dock="Left"  Text="Папка JPG:" />
+                        <TextBox DataContext="{Binding Source={x:Static p:Settings.Default}}" Text="{Binding Path=pathPIC}"
+                                 Margin="5,0,5,0" ToolTip="Имя папки для выгрузки JPG-файлов. Создается в директории файла "/>
+                    </DockPanel>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox Grid.Column="0"  IsChecked="{Binding IsNoEmptyPicture}" Content="Не выгружать без картинок" Margin="5,0,5,0"
+                          ToolTip="При установленом значении запись не выгружается, если у нее нет картинки"/>
+
+                    <DockPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="Записей: " Margin="0,0,12,0"/>
+                        <TextBox DataContext="{Binding Source={x:Static p:Settings.Default}}" Text="{Binding Path=maxRecords,UpdateSourceTrigger=PropertyChanged}" 
+                                 ToolTip="Максимальное количество записей в CSV-файле. При нуле - без ограничения" Width="80" HorizontalAlignment="Left"/>
+                    </DockPanel>
+
+
+                </Grid>
+
+            </Grid>
+
+
+            <ListBox Grid.Row="1" ItemsSource="{Binding Path=Pictures}" Margin="5">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Grid Grid.Row="1" >
+                <ContentControl ContentTemplate="{StaticResource BuzyAnimation}" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            Visibility="{Binding IsVisibleAnimation, Converter={StaticResource BoolToVis}, FallbackValue=Hidden}">
+                    <ContentPresenter />
+                </ContentControl>
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Style="{StaticResource IsFindTopRowDefinition}"/>
+                <RowDefinition Style="{StaticResource IsFindBottomRowDefinition}"/>
+            </Grid.RowDefinitions>
+            <TextBlock  Grid.Row="0" Grid.Column="0"  Text="" Style="{StaticResource Wait}"/>
+
+        </Grid>
+
+
+    </Grid>
+</Window>

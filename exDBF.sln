@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exDBF", "exDBF.csproj", "{4A5DEBB6-8213-4EE4-BB50-38996C0D129D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		All|Any CPU = All|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A5DEBB6-8213-4EE4-BB50-38996C0D129D}.All|Any CPU.ActiveCfg = Release|Any CPU
+		{4A5DEBB6-8213-4EE4-BB50-38996C0D129D}.All|Any CPU.Build.0 = Release|Any CPU
+		{4A5DEBB6-8213-4EE4-BB50-38996C0D129D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A5DEBB6-8213-4EE4-BB50-38996C0D129D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A5DEBB6-8213-4EE4-BB50-38996C0D129D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A5DEBB6-8213-4EE4-BB50-38996C0D129D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5594DD2F-EC1F-4A64-AF1C-F951FC37BDF7}
+	EndGlobalSection
+EndGlobal
